@@ -1,0 +1,31 @@
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { PostsService } from '../../services/posts.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
+@Component({
+  selector: 'app-mypost',
+  templateUrl: './mypost.component.html',
+  styleUrls: ['./mypost.component.css']
+})
+export class MypostComponent implements OnInit {
+	posts:any;
+	user:any;	
+	constructor(public toastr: ToastsManager, vcr: ViewContainerRef,private router: Router,private p:PostsService) {
+		this.toastr.setRootViewContainerRef(vcr);
+		if (localStorage.getItem("currentUser") === null) {
+			this.router.navigate(['/']);
+		}
+		this.user = localStorage.getItem('currentUser');
+		this.p.getAllByUser(JSON.parse(this.user).id).subscribe(
+			result => {
+				this.posts = result.posts
+			},
+			error => console.error('Error: ')
+		);
+	}
+	
+	ngOnInit() {
+
+	}
+}

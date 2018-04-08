@@ -1,0 +1,19 @@
+<div class="container">
+<div class="row">
+	<div class="col-md-12 col-xs-12 col-sm-12 form-area">
+		<div class="form-outer">       
+			<div class="form-inner">
+				<h2>Add Blog</h2>
+				<form *ngIf="blogForm">
+					<input type="hidden" name="userId" [(ngModel)]="newBlog.userId" />
+					<fieldset class="input"><span>Title:</span> <input type="text" name="title" [(ngModel)]="newBlog.title" required /></fieldset>
+					<fieldset class="input"><span>Description:</span> <textarea name="desc" cols="150" [(ngModel)]="newBlog.desc" required ></textarea></fieldset>
+					<fieldset class="input">
+						<input type="button" value="SAVE" class="submit" id="submit" name="submit" (click)="saveBlog(newBlog)" />
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

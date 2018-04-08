@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-xs-12 col-sm-12 form-area">
+			<div class="form-outer">       
+				<div class="form-inner">
+					<h2>Sign Up</h2>
+					<form *ngIf="userForm">
+						<fieldset class="input"><span>First Name:</span> <input type="text" name="firstName" [(ngModel)]="newUser.firstName" required /></fieldset>
+						<fieldset class="input"><span>Last Name:</span> <input type="text" name="lastName" [(ngModel)]="newUser.lastName" required /></fieldset>
+						<fieldset class="input"><span>Email:</span> <input type="text" name="email" [(ngModel)]="newUser.email" required /></fieldset>
+						<fieldset class="input"><span>Password:</span> <input type="password" name="pass" [(ngModel)]="newUser.pass" required /></fieldset>
+						<fieldset class="input">
+							<input type="button" value="SAVE" class="submit" id="submit" name="submit" (click)="saveUser(newUser)" />
+						</fieldset>
+					</form>
+				</div>      
+			</div>
+		</div>
+	</div>
+</div>

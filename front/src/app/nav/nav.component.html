@@ -1,0 +1,27 @@
+<div class="navbar-wrapper">
+    <div class="container-fluid">
+        <nav class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+                    </button>					
+                    <a class="navbar-brand" routerLink="/" routerLinkActive="active">Blog Demo</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse" >
+                    <ul class="nav navbar-nav" *ngIf="!isLoggedIn">
+                        <li id="home" class=""><a routerLink="/" routerLinkActive="active">Home</a></li> 						
+                        <li><a routerLink="/signup" routerLinkActive="active">Sign Up</a></li> 						
+						<li><a routerLink="/login" routerLinkActive="active">Login</a></li>						                       
+					</ul>
+					<ul class="nav navbar-nav" *ngIf="isLoggedIn">
+                        <li id="home" class=""><a routerLink="/" routerLinkActive="active">Home</a></li> 						
+                        <li><a routerLink="/myPost" routerLinkActive="active">My Blogs</a></li> 						
+                        <li><a routerLink="/addPost" routerLinkActive="active">Add Blog</a></li> 						
+						<li><a (click)="logout()" href="javascript:void(0)" >Logout</a></li>						                       
+					</ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

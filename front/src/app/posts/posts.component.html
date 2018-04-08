@@ -1,0 +1,14 @@
+<div class="container posts">
+	<div *ngIf="posts" class="col-md-12 posts-box">
+		<div class="row">
+			<div class="col-md-12">
+				<h6>Created : {{ posts?.created }}</h6>				
+				<h1>{{ posts?.title }}</h1>
+				<div>
+					{{ posts?.description }}
+				</div>
+				<h6>By {{ posts?.first_name }} {{ posts?.last_name }} </h6>				
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+div.posts{
+	background: #E8ECDE;
+	padding: 15px;
+	margin-bottom: 10px;
+}
+div.posts .blog-title {
+    font-size: 30px;
+    line-height: 36px;
+}
+div.posts p{
+	margin-bottom: 20px;
+}
+div.posts a.blog-button {
+    border: 2px solid #f13624;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: 'ProximaNovaLight';
+    padding: 10px;
+    background-color: #f13624;
+    /*transition: background-color 0.3s, color 0.3s;*/
+    border-radius: 4px;
+}

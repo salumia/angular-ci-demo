@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-xs-12 col-sm-12 form-area">
+			<div class="form-outer">       
+				<div class="form-inner">
+					<h2>Login</h2>
+					<form *ngIf="loginForm">
+						<fieldset class="input"><span>Email:</span> <input type="text" name="email" [(ngModel)]="loginUser.email" required /></fieldset>
+						<fieldset class="input"><span>Password:</span> <input type="password" name="pass" [(ngModel)]="loginUser.pass" required /></fieldset>
+						<fieldset class="input">
+							<input type="button" value="SAVE" class="submit" id="submit" name="submit" (click)="login(loginUser)" />
+						</fieldset>
+					</form>
+				</div>      
+			</div>
+		</div>
+	</div>
+</div>
