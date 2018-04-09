@@ -27,14 +27,12 @@ export class SignupComponent implements OnInit {
 	saveUser=function(user:User){		
 		this.userService.create(user).subscribe(
 			response => {
-				if (response && response.status) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(response.user));
+				if (response && response.status) {                    
 					this.toastr.success('You have registered successfully.Redirecting...', 'Success!');
 					this.newUser = '';
 					setTimeout((router: Router) => {
 						this.router.navigate(['/login']);
-					}, 3000);  //5s
+					}, 3000);
 				} else {
 					this.toastr.error(response.message, 'Oops!');
 					//error message

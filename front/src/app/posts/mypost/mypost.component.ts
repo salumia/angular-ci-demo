@@ -9,15 +9,13 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   styleUrls: ['./mypost.component.css']
 })
 export class MypostComponent implements OnInit {
-	posts:any;
-	user:any;	
+	posts:any;	
 	constructor(public toastr: ToastsManager, vcr: ViewContainerRef,private router: Router,private p:PostsService) {
 		this.toastr.setRootViewContainerRef(vcr);
 		if (localStorage.getItem("currentUser") === null) {
 			this.router.navigate(['/']);
 		}
-		this.user = localStorage.getItem('currentUser');
-		this.p.getAllByUser(JSON.parse(this.user).id).subscribe(
+		this.p.getAllByUser().subscribe(
 			result => {
 				if(result.status){
 					this.posts = result.posts

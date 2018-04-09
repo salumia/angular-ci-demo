@@ -15,7 +15,8 @@ export class PostsService {
 	constructor(private http: Http, private common:CommonService) { 
 		this.BASE_URL = this.common.getBaseUrl();
 		this.headers = new Headers({
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + this.common.getToken()
 		});
 	}
 
@@ -28,18 +29,20 @@ export class PostsService {
 			response => response.json()
 		)
 	}
-	getAllByUser(id) {
-		console.log(id)
-		return this.http.get(this.BASE_URL + 'Post/myPosts/'+ id).map(
-			response => response.json()
-		);
-	}
-	getPost(id) {
-		return this.http.get(this.BASE_URL + 'Post/view/' +  id).map(
+	
+	getAllByUser(): Observable<any> {
+		return this.http.post(this.BASE_URL + 'Post/myPosts/', '',{ headers:this.headers})
+				   .map(
 			response => response.json()
 		);
 	}
 	
+	getPost(id) {
+		return this.http.post(this.BASE_URL + 'Post/view/' +  id, '',{ headers:this.headers}).map(
+			response => response.json()
+		);
+	}
+
 	create(post: Post): Observable<any> {
 		return this.http.post(this.BASE_URL + 'Post/create/', post,{ headers:this.headers})
 				   .map(

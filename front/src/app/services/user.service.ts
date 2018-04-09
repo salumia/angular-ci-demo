@@ -17,7 +17,6 @@ export class UserService {
 		this.BASE_URL = this.common.getBaseUrl();
 		this.headers = new Headers({
 			'Content-Type': 'application/json'
-			//,'Authorization': 'Bearer ' + this.common.getToken()
 		});
 	}
 	
@@ -28,8 +27,8 @@ export class UserService {
 		);
 	}
 	
-	login(user: User): Observable<any> {
-		return this.http.post(this.BASE_URL + 'User/login', user,{ headers:this.headers})
+	login(user: User): Observable<any> {		
+		return this.http.post(this.BASE_URL + 'Auth/login_post', user,{ headers:this.headers})
 				   .map(
 			response => response.json()
 		);

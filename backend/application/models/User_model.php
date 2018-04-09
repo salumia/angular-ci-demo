@@ -28,7 +28,7 @@ class User_model extends CI_Model {
             'first_name' => $this->db->escape_str($input['firstName']),
             'last_name' => $this->db->escape_str($input['lastName']),
             'email' => $this->db->escape_str($input['email']),
-            'password' => $this->db->escape_str(md5($input['pass'])),
+            'password' => $this->db->escape_str(sha1($input['pass'])),
             'updated_at' => date('Y-m-d H:i:s')
         ); 	
         if ($id == 0) {
@@ -53,6 +53,10 @@ class User_model extends CI_Model {
         $query = $this->db->get_where('user', array('email' => $input['email'], 'password' => md5($input['pass'])));        
         return $query->row_array();
     }	
+	
+	function getUser($q) {
+		return $this->db->get_where('user',$q);
+	}
 	
 	/**
 	 * checkUserAlreadyExist

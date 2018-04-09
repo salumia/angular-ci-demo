@@ -28,15 +28,13 @@ class Post extends My_Controller
 	 */
 	function index_get(){
 		// get all posts from db
-		if($data=$this->Post_model->getAllPosts()){
-			//echo json_encode(array('status'=>200,'posts'=>$data,'message'=>''));	
+		if($data=$this->Post_model->getAllPosts()){	
 			$this->response([
                     'status' => true,
 					'posts' => $data,
                     'message' => ''
                 ], REST_Controller::HTTP_OK);
 		} else {
-			//echo json_encode(array('status'=>200,'posts'=>array(),'message'=>'Posts not found in database'));
 			$this->response([
                     'status' => false,
                     'message' => 'Posts not found in database'
@@ -52,21 +50,19 @@ class Post extends My_Controller
 	 * @param int 'user Id'
 	 * @return void
 	 */
-	function myPosts_get(){
-		//$this->auth();
+	function myPosts_post(){
+		$this->auth();
 		//get user id from url
-		$userId = $this->uri->segment(3);
+		$userId = $this->user_data->id;
 		
 		// get user posts from db
 		if($data=$this->Post_model->getAllPostsByUser($userId)){
-			//echo json_encode(array('status'=>200,'posts'=>$data,'message'=>''));
 			$this->response([
                     'status' => true,
 					'posts'=>$data,
                     'message' => ''
                 ], REST_Controller::HTTP_OK);			
 		} else {
-			//echo json_encode(array('status'=>200,'posts'=>array(),'message'=>'Your dont have posts'));
 			$this->response([
                     'status' => false,
                     'message' => 'You dont have posts'
@@ -83,26 +79,24 @@ class Post extends My_Controller
 	 * @return void
 	 */
 	public function create_post(){
-		//$this->auth();
+		$this->auth();
 		//get input data
 		$input = json_decode(file_get_contents('php://input'), true);
 		if((isset($input['title']) && !empty($input['title'])) && (isset($input['desc']) && !empty($input['desc']))){
 			// save post data in db	
+			$input['userId'] = $this->user_data->id;
 			if ($this->Post_model->setPost($input)){                             
-				//echo json_encode(array('status'=>200,'message'=>''));
 				$this->response([
                     'status' => true,
                     'message' => 'Blog added successfully'
                 ], REST_Controller::HTTP_OK);				
 			}else{                
-				//echo json_encode(array('status'=>201,'message'=>'Something went wrong.'));	
 				$this->response([
                     'status' => false,
                     'message' => 'Something went wrong.'
                 ], REST_Controller::HTTP_OK);
 			} 
 		} else {
-			//echo json_encode(array('status'=>201,'message'=>'Required fields are missing'));
 			$this->response([
                     'status' => false,
                     'message' => 'Required fields are missing'
@@ -118,23 +112,21 @@ class Post extends My_Controller
 	 * @param int 
 	 * @return void
 	 */
-	function view_get(){
-		//$this->auth();
+	function view_post(){
+		$this->auth();
 		//get post id from url
-		$id = $this->uri->segment(3);		
+		$id = $this->uri->segment(3);			
         if(empty($id)){
             show_404();
         }		
 		// get post data from db	
-		if($data=$this->Post_model->getPostById($id)){
-			//echo json_encode(array('status'=>200,'post'=>$data,'message'=>''));	
+		if($data=$this->Post_model->getPostById($id)){	
 			$this->response([
                     'status' => true,
 					'post'=>$data,
                     'message' => ''
                 ], REST_Controller::HTTP_OK);
 		} else {
-			//echo json_encode(array('status'=>200,'post'=>array(),'message'=>'Post not found in database'));
 			$this->response([
                     'status' => false,
 					'post'=>array(),

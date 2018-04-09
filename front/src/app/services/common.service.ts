@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CommonService {
 
-	private BASE_URL = "http://localhost/blog/backend/index.php/";
+	private BASE_URL = "http://localhost/blog-demo/angular-ci-demo/backend/index.php/";
+	private userToken = "";
 	
 	constructor() { }
 	
@@ -12,6 +13,7 @@ export class CommonService {
 	}	
 	
 	getToken(){
-		return '';
+		this.userToken = localStorage.getItem('currentUser');
+		return this.userToken;
 	}
 }

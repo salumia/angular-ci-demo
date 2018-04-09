@@ -4,8 +4,7 @@
 		<div class="form-outer">       
 			<div class="form-inner">
 				<h2>Add Blog</h2>
-				<form *ngIf="blogForm">
-					<input type="hidden" name="userId" [(ngModel)]="newBlog.userId" />
+				<form>
 					<fieldset class="input"><span>Title:</span> <input type="text" name="title" [(ngModel)]="newBlog.title" required /></fieldset>
 					<fieldset class="input"><span>Description:</span> <textarea name="desc" cols="150" [(ngModel)]="newBlog.desc" required ></textarea></fieldset>
 					<fieldset class="input">

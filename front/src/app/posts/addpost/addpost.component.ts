@@ -10,8 +10,6 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   styleUrls: ['./addpost.component.css']
 })
 export class AddpostComponent implements OnInit {
-	blogForm:boolean=false;
-	user:any;
 	newBlog:any={};
 	constructor(public toastr: ToastsManager, vcr: ViewContainerRef,private router: Router,private p:PostsService) {
 		this.toastr.setRootViewContainerRef(vcr);
@@ -20,10 +18,7 @@ export class AddpostComponent implements OnInit {
 	ngOnInit() {	
 		if (localStorage.getItem("currentUser") === null) {
 			this.router.navigate(['/']);
-		}
-		this.blogForm=true;		
-		this.user = localStorage.getItem('currentUser');
-		this.newBlog.userId = JSON.parse(this.user).id;
+		}	
 	}
 	
 	saveBlog=function(post:Post){			

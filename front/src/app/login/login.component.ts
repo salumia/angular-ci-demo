@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit {
 	login=function(user:User){	
 		this.userService.login(user).subscribe(
 			response => {
-				if (response && response.status) {
+				console.log(response);
+				if (response && response.status === 200) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(response.user));					
+                    localStorage.setItem('currentUser', response.data.token);					
 					this.toastr.success('You have logged in successfully.Redirecting...', 'Success!');
 					this.loginUser = '';
 					this.isLoggedIn.emit(true);
@@ -37,8 +38,7 @@ export class LoginComponent implements OnInit {
 				} else {
 					this.toastr.error(response.message, 'Oops!');
 					//error message
-				}
-				
+				}				
 			},
 			error => {
 				console.log(error);
