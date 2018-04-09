@@ -1,4 +1,7 @@
-<app-nav></app-nav>
-<section>
-<router-outlet></router-outlet>
+<app-nav loginState='isLoggedIn'></app-nav>
+<section *ngIf="isloginPage">
+	<app-login (isLoggedIn)='setLoginState($event)'></app-login>
+</section>
+<section *ngIf="!isloginPage">
+	<router-outlet></router-outlet>
 </section>

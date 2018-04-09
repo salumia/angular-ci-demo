@@ -19,7 +19,9 @@ export class MypostComponent implements OnInit {
 		this.user = localStorage.getItem('currentUser');
 		this.p.getAllByUser(JSON.parse(this.user).id).subscribe(
 			result => {
-				this.posts = result.posts
+				if(result.status){
+					this.posts = result.posts
+				}
 			},
 			error => console.error('Error: ')
 		);

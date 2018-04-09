@@ -17,6 +17,7 @@ export class UserService {
 		this.BASE_URL = this.common.getBaseUrl();
 		this.headers = new Headers({
 			'Content-Type': 'application/json'
+			//,'Authorization': 'Bearer ' + this.common.getToken()
 		});
 	}
 	

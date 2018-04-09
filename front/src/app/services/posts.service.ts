@@ -19,10 +19,14 @@ export class PostsService {
 		});
 	}
 
-	getAll() {
+	public handleError = (error: Response) => {
+			return error.statusText;
+	}
+	
+	getAll(): Observable<any> {
 		return this.http.get(this.BASE_URL + 'Post' ).map(
 			response => response.json()
-		);
+		)
 	}
 	getAllByUser(id) {
 		console.log(id)

@@ -11,7 +11,9 @@ export class HomeComponent implements OnInit {
 	constructor(private p:PostsService) {
 		this.p.getAll().subscribe(
 			result => {
-				this.posts = result.posts
+				if(result.status){
+					this.posts = result.posts
+				}				
 			},
 			error => console.error('Error: ')
 		);

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
@@ -10,16 +10,15 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-	loginForm:boolean=false;
-	loginUser:any={};
+	loginUser:any={}; //object to contain user login form field values
+	@Output() isLoggedIn = new EventEmitter<boolean>();
+	
 	constructor(public toastr: ToastsManager, vcr: ViewContainerRef,private router: Router,private userService:UserService) {
 		this.toastr.setRootViewContainerRef(vcr);
 	}
 
 	ngOnInit() {	
-		if (localStorage.getItem("currentUser") === null) {
-			this.loginForm=true;
-		} else {
+		if (localStorage.getItem("currentUser") != null) {
 			this.router.navigate(['/']);
 		}			
 	}
@@ -27,14 +26,14 @@ export class LoginComponent implements OnInit {
 	login=function(user:User){	
 		this.userService.login(user).subscribe(
 			response => {
-				if (response && response.status == '200') {
+				if (response && response.status) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(response.user));					
 					this.toastr.success('You have logged in successfully.Redirecting...', 'Success!');
 					this.loginUser = '';
-					setTimeout((router: Router) => {
-						this.router.navigate(['/']);
-					}, 3000);  //5s
+					this.isLoggedIn.emit(true);
+					//this.router.navigate(['/']);
+					window.location.reload();
 				} else {
 					this.toastr.error(response.message, 'Oops!');
 					//error message

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -7,11 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 	
-	@Input() public isLoggedIn: boolean;
+	@Input() public loginState: boolean;
+	public isLoggedIn: boolean = false;
 	
-	constructor() { }
+	constructor(private router: Router,) { }
 	
 	ngOnInit() {
+		console.log(this.loginState);
 		if(localStorage.getItem('currentUser')){
 			this.isLoggedIn = true;
 		}
@@ -22,5 +25,7 @@ export class NavComponent implements OnInit {
 	logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+		this.isLoggedIn = false;
+		this.router.navigate(['/']);
     }
 }

@@ -9,5 +9,9 @@ export class CommonService {
 	
 	getBaseUrl(){
 		return this.BASE_URL;
+	}	
+	
+	getToken(){
+		return '';
 	}
 }

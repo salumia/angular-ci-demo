@@ -4,7 +4,7 @@
 			<div class="form-outer">       
 				<div class="form-inner">
 					<h2>Sign Up</h2>
-					<form *ngIf="userForm">
+					<form>
 						<fieldset class="input"><span>First Name:</span> <input type="text" name="firstName" [(ngModel)]="newUser.firstName" required /></fieldset>
 						<fieldset class="input"><span>Last Name:</span> <input type="text" name="lastName" [(ngModel)]="newUser.lastName" required /></fieldset>
 						<fieldset class="input"><span>Email:</span> <input type="text" name="email" [(ngModel)]="newUser.email" required /></fieldset>

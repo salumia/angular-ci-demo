@@ -17,7 +17,6 @@ export class PostsComponent implements OnInit {
 
 	}
   
-	//Post
 	getPostData(){
 		this.route.params.forEach((params: Params) => {
 			let id = +params['id'];

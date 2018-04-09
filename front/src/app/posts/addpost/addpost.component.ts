@@ -29,7 +29,7 @@ export class AddpostComponent implements OnInit {
 	saveBlog=function(post:Post){			
 		this.p.create(post).subscribe(
 			response => {
-				if (response && response.status == '200') {
+				if (response && response.status) {
 					this.toastr.success('Blog added successfully.Redirecting...', 'Success!');
 					setTimeout((router: Router) => {
 						this.router.navigate(['/myPost']);
@@ -40,7 +40,6 @@ export class AddpostComponent implements OnInit {
 				}
 			},
 			error => {
-				console.log(error);
 				this.toastr.error(error, 'Oops!');
 			});				
 	}

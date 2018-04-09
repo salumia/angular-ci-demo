@@ -10,16 +10,16 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-	userForm:boolean=false;
-	newUser:any={};
+	
+	newUser:any={};	//object to contain user form field values
+	
 	constructor(public toastr: ToastsManager, vcr: ViewContainerRef,private router: Router,private userService:UserService) {
 		this.toastr.setRootViewContainerRef(vcr);
 	}
 
 	ngOnInit() {	
-		if (localStorage.getItem("currentUser") === null) {
-			this.userForm=true;
-		} else {
+		//check if user logged in, redirect to home page
+		if (localStorage.getItem("currentUser") != null) {
 			this.router.navigate(['/']);
 		}
 	}
@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
 	saveUser=function(user:User){		
 		this.userService.create(user).subscribe(
 			response => {
-				if (response && response.status == '200') {
+				if (response && response.status) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(response.user));
 					this.toastr.success('You have registered successfully.Redirecting...', 'Success!');
